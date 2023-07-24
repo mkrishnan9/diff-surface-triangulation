@@ -40,7 +40,7 @@ def init_graph(curvature_direction, parametrization, points_3D, faces_3D, bounda
         full_points = utils.entry_stop_gradients(parametrization, boundary_mask)
         weights = tf.Variable(np.random.uniform(size=n_points)*0.00005 + 0.0001, dtype=tf.float32)
         use_weights = tf.minimum(tf.abs(weights), 0.002)
-        neighbors = utils.compute_nearest_neighbors(full_points,N_NEAREST_NEIGHBORS)
+        neighbors = utils.compute_nearest_neighbors(full_points,N_NEAREST_NEIGHBORS)   #https://stackoverflow.com/questions/43364985/how-to-stop-gradient-for-some-entry-of-a-tensor-in-tensorflow
         points_3D = tf.constant(points_3D, dtype = tf.float32)
         faces_3D = tf.constant(faces_3D, dtype = tf.int32)
         neighbor_points =tf.gather(full_points, neighbors)
